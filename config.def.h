@@ -59,6 +59,17 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+/**
+ * config.h 
+ * ALT + F11 | F12 
+ */
+
+static const char *upvol[]   = { "amixer", "set", "Master", "3+",     NULL };
+static const char *downvol[] = { "amixer", "set", "Master", "3-",     NULL };
+// There is a bug in amixer set Master toggle as described in
+// https://superuser.com/questions/805525/why-is-unmute-not-working-with-amixer-command
+// So I don't add mutevol to a key binding, but keep this command.
+static const char *mutevol[] = { "amixer", "set", "Master", "toggle", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -95,6 +106,8 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY,                       XK_F6,    spawn,          {.v = upvol   } },
+	{ MODKEY,                       XK_F5,    spawn,          {.v = downvol } },
 };
 
 /* button definitions */
