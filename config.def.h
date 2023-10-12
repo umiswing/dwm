@@ -23,9 +23,13 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd2[] = {"goldendict", NULL };
+const char *spcmd3[] = {"qq", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
+        {"spdict",  spcmd2},
+        {"spqq",        spcmd3},
 };
 
 /* tagging */
@@ -37,9 +41,9 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance     title       tags mask     isfloating   monitor */
-        { "Gimp",     NULL,        NULL,       0,            1,           -1 },
-        { "Firefox",  NULL,        NULL,       1 << 8,       0,           -1 },
         { NULL,       "spterm",    NULL,       SPTAG(0),     1,           -1 },
+        { "GoldenDict",   NULL,        NULL,       SPTAG(1),     1,           -1 },
+        { "QQ",     NULL,        NULL,       SPTAG(2),     1,            1 },
 };
 
 /* layout(s) */
@@ -107,7 +111,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,                       XK_Return,  togglescratch,  {.ui = 0 } },
+        { MODKEY,                       XK_Return, togglescratch,  {.ui = 0 } },
+	{ MODKEY,                       XK_g,      togglescratch,  {.ui = 1 } },
+	{ MODKEY,                       XK_q,      togglescratch,  {.ui = 2 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
