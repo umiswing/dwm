@@ -30,11 +30,13 @@ typedef struct {
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"goldendict", NULL };
 const char *spcmd3[] = {"qq", NULL };
+const char *spcmd4[] = {"bash", "$HOME/dwm/wechat_wine_patch/run_wechat.sh", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
-	{"spterm",      spcmd1},
-        {"spdict",  spcmd2},
-        {"spqq",        spcmd3},
+	{"spterm",       spcmd1},
+        {"spdict",       spcmd2},
+        {"spqq",         spcmd3},
+        {"spwechat",     spcmd4},
 };
 
 /* tagging */
@@ -45,10 +47,11 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance     title       tags mask     isfloating   monitor */
-        { NULL,       "spterm",    NULL,       SPTAG(0),     1,           -1 },
+        /* class          instance     title       tags mask     isfloating   monitor */
+        { NULL,           "spterm",    NULL,       SPTAG(0),     1,           -1 },
         { "GoldenDict",   NULL,        NULL,       SPTAG(1),     1,           -1 },
-        { "QQ",     NULL,        NULL,       SPTAG(2),     1,            1 },
+        { "QQ",           NULL,        NULL,       SPTAG(2),     1,           -1 },
+        { "wechat.exe",   NULL,        NULL,       SPTAG(3),     1,           -1 },
 };
 
 /* layout(s) */
@@ -119,6 +122,7 @@ static const Key keys[] = {
         { MODKEY,                       XK_Return, togglescratch,  {.ui = 0 } },
 	{ MODKEY,                       XK_g,      togglescratch,  {.ui = 1 } },
 	{ MODKEY,                       XK_q,      togglescratch,  {.ui = 2 } },
+        { MODKEY,                       XK_v,      togglescratch,  {.ui = 3 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
